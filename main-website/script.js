@@ -281,21 +281,21 @@ window.addEventListener('DOMContentLoaded', fadeInOnScroll);
 // Simple form handler (no backend)
 const form = document.querySelector('form');
 if (form) {
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    fetch('http://localhost:3000/api/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: form.elements[0].value,
-        email: form.elements[1].value,
-        message: form.elements[2].value
-      })
-    }).then(res => res.json()).then(data => {
-      alert('Thank you for your message!');
-      form.reset();
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        fetch('https://my-portfolio-tz8x.onrender.com/api/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: form.elements[0].value,
+                email: form.elements[1].value,
+                message: form.elements[2].value
+            })
+        }).then(res => res.json()).then(data => {
+            alert('Thank you for your message!');
+            form.reset();
+        });
     });
-  });
 }
 
 // Inline edit mode toggle for all editable sections
