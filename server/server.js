@@ -67,4 +67,6 @@ app.get('/dashboard-login.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'dashboard-login.html'));
 });
 
-app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+// --- THIS IS THE IMPORTANT PART FOR RENDER ---
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
