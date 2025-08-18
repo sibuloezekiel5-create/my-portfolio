@@ -1,3 +1,19 @@
+// Add a button to launch the dashboard from the main website
+document.addEventListener('DOMContentLoaded', function() {
+    // Change this URL to your actual dashboard URL on Render
+    const dashboardUrl = 'https://my-portfolio-tz8x.onrender.com/dashboard.html';
+    let dashBtn = document.getElementById('dashboard-launch-btn');
+    if (!dashBtn) {
+        dashBtn = document.createElement('button');
+        dashBtn.id = 'dashboard-launch-btn';
+        dashBtn.textContent = 'Go to Dashboard';
+        dashBtn.style = 'position:fixed;bottom:24px;right:24px;z-index:9999;padding:0.8rem 1.2rem;background:#0078d7;color:#fff;border:none;border-radius:8px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.10);cursor:pointer;';
+        dashBtn.onclick = function() {
+            window.open(dashboardUrl, '_blank');
+        };
+        document.body.appendChild(dashBtn);
+    }
+});
 // Utility: add change buttons to all media items in edit mode
 function addMediaChangeButtons() {
     const mediaGallery = document.getElementById('media-gallery');
