@@ -205,7 +205,10 @@ if (mediaGallery) {
 const mediaBtns = document.getElementById('media-btns');
 const mediaFileBtn = document.getElementById('media-file-btn');
 const mediaUrlBtn = document.getElementById('media-url-btn');
+const mediaTextBtn = document.getElementById('media-text-btn');
+const mediaAnyFileBtn = document.getElementById('media-anyfile-btn');
 const mediaUpload = document.getElementById('media-upload');
+const mediaAnyFileUpload = document.getElementById('media-anyfile-upload');
 const mediaGallery = document.getElementById('media-gallery');
 // Show/hide media buttons in edit mode
 if (mediaBtns && editBtn) {
@@ -272,6 +275,51 @@ if (mediaUrlBtn && mediaGallery) {
         }
     });
 }
+// Add text
+if (mediaTextBtn && mediaGallery) {
+    mediaTextBtn.addEventListener('click', function() {
+        const text = prompt('Enter the text to add:');
+        if (text && text.trim() !== '') {
+            const el = document.createElement('div');
+            el.textContent = text.trim();
+            el.className = 'media-text';
+            el.setAttribute('contenteditable', 'true');
+            el.style.padding = '0.5rem 1rem';
+            el.style.background = '#f8f9fa';
+            el.style.borderRadius = '8px';
+            el.style.marginBottom = '0.5rem';
+            el.style.fontSize = '1.1rem';
+            mediaGallery.appendChild(el);
+        }
+    });
+}
+
+// Add any file (with download link)
+if (mediaAnyFileBtn && mediaAnyFileUpload && mediaGallery) {
+    mediaAnyFileBtn.addEventListener('click', function() {
+        mediaAnyFileUpload.click();
+    });
+    mediaAnyFileUpload.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const url = URL.createObjectURL(file);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = file.name;
+            link.textContent = `Download: ${file.name}`;
+            link.className = 'media-file-link';
+            link.style.display = 'block';
+            link.style.marginBottom = '0.5rem';
+            link.style.background = '#e3eafc';
+            link.style.padding = '0.5rem 1rem';
+            link.style.borderRadius = '8px';
+            link.style.textDecoration = 'none';
+            link.style.color = '#0078d7';
+            mediaGallery.appendChild(link);
+        }
+    });
+}
+
 // Responsive nav menu toggle
 const menuToggle = document.getElementById('menu-toggle');
 const navLinks = document.querySelector('.nav-links');
@@ -359,6 +407,133 @@ document.addEventListener('DOMContentLoaded', function() {
                     heroAvatar.src = evt.target.result;
                 };
                 reader.readAsDataURL(file);
+            }
+        });
+    }
+});
+
+// Add support for text and any file in the media section
+document.addEventListener('DOMContentLoaded', function() {
+    const mediaBtns = document.getElementById('media-btns');
+    const mediaFileBtn = document.getElementById('media-file-btn');
+    const mediaUrlBtn = document.getElementById('media-url-btn');
+    const mediaTextBtn = document.getElementById('media-text-btn');
+    const mediaAnyFileBtn = document.getElementById('media-anyfile-btn');
+    const mediaUpload = document.getElementById('media-upload');
+    const mediaAnyFileUpload = document.getElementById('media-anyfile-upload');
+    const mediaGallery = document.getElementById('media-gallery');
+    const editBtn = document.getElementById('edit-toggle');
+    let editMode = false;
+
+    // Show/hide media buttons in edit mode
+    if (mediaBtns && editBtn) {
+        editBtn.addEventListener('click', function() {
+            editMode = !editMode;
+            mediaBtns.style.display = editMode ? 'flex' : 'none';
+        });
+        mediaBtns.style.display = 'none';
+    }
+
+    // Add from device (image/video)
+    if (mediaFileBtn && mediaUpload && mediaGallery) {
+        mediaFileBtn.addEventListener('click', function() {
+            mediaUpload.click();
+        });
+        mediaUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    let el;
+                    if (file.type.startsWith('image/')) {
+                        el = document.createElement('img');
+                        el.src = evt.target.result;
+                        el.alt = 'User Image';
+                    } else if (file.type.startsWith('video/')) {
+                        el = document.createElement('video');
+                        el.controls = true;
+                        const source = document.createElement('source');
+                        source.src = evt.target.result;
+                        source.type = file.type;
+                        el.appendChild(source);
+                    }
+                    if (el) {
+                        el.setAttribute('contenteditable', 'false');
+                        mediaGallery.appendChild(el);
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Add from URL (image/video)
+    if (mediaUrlBtn && mediaGallery) {
+        mediaUrlBtn.addEventListener('click', function() {
+            const url = prompt('Paste image or video URL:');
+            if (url && url.trim() !== '') {
+                let el;
+                if (url.match(/\.(jpeg|jpg|gif|png|webp|bmp|svg)$/i)) {
+                    el = document.createElement('img');
+                    el.src = url.trim();
+                    el.alt = 'User Image';
+                } else if (url.match(/\.(mp4|webm|ogg)$/i)) {
+                    el = document.createElement('video');
+                    el.controls = true;
+                    const source = document.createElement('source');
+                    source.src = url.trim();
+                    source.type = 'video/' + url.split('.').pop();
+                    el.appendChild(source);
+                }
+                if (el) {
+                    el.setAttribute('contenteditable', 'false');
+                    mediaGallery.appendChild(el);
+                }
+            }
+        });
+    }
+
+    // Add text
+    if (mediaTextBtn && mediaGallery) {
+        mediaTextBtn.addEventListener('click', function() {
+            const text = prompt('Enter the text to add:');
+            if (text && text.trim() !== '') {
+                const el = document.createElement('div');
+                el.textContent = text.trim();
+                el.className = 'media-text';
+                el.setAttribute('contenteditable', 'true');
+                el.style.padding = '0.5rem 1rem';
+                el.style.background = '#f8f9fa';
+                el.style.borderRadius = '8px';
+                el.style.marginBottom = '0.5rem';
+                el.style.fontSize = '1.1rem';
+                mediaGallery.appendChild(el);
+            }
+        });
+    }
+
+    // Add any file (with download link)
+    if (mediaAnyFileBtn && mediaAnyFileUpload && mediaGallery) {
+        mediaAnyFileBtn.addEventListener('click', function() {
+            mediaAnyFileUpload.click();
+        });
+        mediaAnyFileUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = file.name;
+                link.textContent = `Download: ${file.name}`;
+                link.className = 'media-file-link';
+                link.style.display = 'block';
+                link.style.marginBottom = '0.5rem';
+                link.style.background = '#e3eafc';
+                link.style.padding = '0.5rem 1rem';
+                link.style.borderRadius = '8px';
+                link.style.textDecoration = 'none';
+                link.style.color = '#0078d7';
+                mediaGallery.appendChild(link);
             }
         });
     }
