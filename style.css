@@ -318,3 +318,28 @@ footer {
         text-align: center;
     }
 }
+
+.media-text {
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    color: #222;
+    box-shadow: 0 2px 8px rgba(0,120,215,0.06);
+}
+.media-file-link {
+    display: block;
+    margin-bottom: 0.5rem;
+    background: #e3eafc;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #0078d7;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,120,215,0.06);
+}
+.media-file-link:hover {
+    background: #b6d0f7;
+    color: #005fa3;
+}
