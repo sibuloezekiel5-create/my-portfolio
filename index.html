@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">MyPortfolio</div>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation">&#9776;</button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#media">Media</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button id="edit-toggle" aria-label="Toggle Edit Mode">Edit Mode</button>
+        </nav>
+    </header>
+    <main>
+        <section id="hero" class="hero-section fade-in editable-section" contenteditable="false">
+            <div class="hero-content">
+                <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="Profile" class="hero-avatar"
+                    contenteditable="false" />
+                <div>
+                    <h1 contenteditable="false">Hi, I'm <span id="editable-name">[Your Name]</span></h1>
+                    <p contenteditable="false" id="editable-hero">A passionate developer crafting beautiful web experiences.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="about" class="fade-in editable-section" contenteditable="false">
+            <h2 contenteditable="false">About Me</h2>
+            <p contenteditable="false" id="editable-about">Welcome to my portfolio. I specialize in building modern,
+                responsive, and accessible web applications. Click 'Edit Mode' to update this text!</p>
+        </section>
+        <section id="projects" class="fade-in editable-section" contenteditable="false">
+            <h2 contenteditable="false">Projects</h2>
+            <button id="add-project-btn" type="button" style="display:none;margin-bottom:1rem;">Add Project</button>
+            <div class="project-list" id="project-list">
+                <div class="project-card" contenteditable="false">
+                    <h3 contenteditable="false">Project Title</h3>
+                    <p contenteditable="false">Short description of your project.</p>
+                    <a href="#" download contenteditable="false">Download File</a>
+                </div>
+            </div>
+        </section>
+        <section id="media" class="fade-in editable-section" contenteditable="false">
+            <h2 contenteditable="false">Media</h2>
+            <div id="media-btns" style="display:none;gap:0.5rem;margin-bottom:1rem;">
+                <button id="media-file-btn" type="button">Add from Device</button>
+                <button id="media-url-btn" type="button">Add from URL</button>
+                <button id="media-text-btn" type="button">Add Text</button>
+                <button id="media-anyfile-btn" type="button">Add Any File</button>
+            </div>
+            <div class="media-gallery" id="media-gallery">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+                    alt="Sample" contenteditable="false" />
+                <video controls contenteditable="false">
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <input type="file" id="media-upload" accept="image/*,video/*" style="display:none;" />
+            <input type="file" id="media-anyfile-upload" style="display:none;" />
+        </section>
+        <section id="contact" class="fade-in editable-section" contenteditable="false">
+            <h2 contenteditable="false">Contact</h2>
+            <form>
+                <input type="text" placeholder="Your Name" required contenteditable="false">
+                <input type="email" placeholder="Your Email" required contenteditable="false">
+                <textarea placeholder="Your Message" required contenteditable="false"></textarea>
+                <button type="submit" contenteditable="false">Send</button>
+            </form>
+        </section>
+    </main>
+    <footer class="editable-section" contenteditable="false">
+        <p contenteditable="false">&copy; 2025 <span id="editable-footer-name">[Your Name]</span>. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
