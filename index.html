@@ -60,6 +60,8 @@
             <div style="display:flex;gap:0.5rem;margin-bottom:1rem;display:none;" id="media-btns">
                 <button id="media-file-btn" type="button">Add from Device</button>
                 <button id="media-url-btn" type="button">Add from URL</button>
+                <button id="media-text-btn" type="button">Add Text</button>
+                <button id="media-anyfile-btn" type="button">Add Any File</button>
             </div>
             <div class="media-gallery" id="media-gallery">
                 <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Sample" contenteditable="false" />
@@ -67,9 +69,10 @@
                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <!-- Add more images/videos as needed -->
+                <!-- Add more images/videos/text/files as needed -->
             </div>
             <input type="file" id="media-upload" accept="image/*,video/*" style="display:none;" />
+            <input type="file" id="media-anyfile-upload" style="display:none;" />
         </section>
         <section id="contact" class="fade-in editable-section" contenteditable="false">
             <h2 contenteditable="false">Contact</h2>
